@@ -3,7 +3,7 @@ import type { ChatMessage } from './types';
 import { messages, channels } from '../store';
 
 export async function intialiseClient() {
-	let client = new tmi.client({ channels: ['roflgator'] });
+	let client = new tmi.client({});
 
 	client.on('disconnected', () => {
 		console.log('Disconnected from twitch servers');
