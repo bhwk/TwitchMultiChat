@@ -1,9 +1,9 @@
-<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { messages } from '../lib/stores/chat';
+	import { messages } from '../lib/store';
 	import { intialiseClient } from '../lib/utils/twitchClient';
 	import type { Client } from 'tmi.js';
+
 	let client: Client;
 
 	onMount(async () => {

@@ -1,6 +1,6 @@
 import * as tmi from 'tmi.js';
 import type { ChatMessage } from './types';
-import { messages } from '../stores/chat';
+import { messages } from '../store';
 import { onDestroy } from 'svelte';
 
 export async function intialiseClient() {
