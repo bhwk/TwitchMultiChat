@@ -1,13 +1,13 @@
 import * as tmi from 'tmi.js';
 import type { ChatMessage } from './types';
-import { messages } from '../store';
-import { onDestroy } from 'svelte';
+import { messages, channels } from '../store';
 
 export async function intialiseClient() {
 	let client = new tmi.client({ channels: ['roflgator'] });
 
 	client.on('disconnected', () => {
 		console.log('Disconnected from twitch servers');
+		channels.set([]);
 	});
 
 	client.on('connected', () => {
@@ -17,12 +17,28 @@ export async function intialiseClient() {
 	client.on('part', (channel, username, self) => {
 		if (self) {
 			console.log('Left: ', channel);
+			channels.update((channels) => {
+				if (!channels.includes(channel)) {
+					return channels;
+				} else {
+					channels.splice(channels.indexOf(channel), 1);
+					return channels;
+				}
+			});
 		}
 	});
 
 	client.on('join', (channel, username, self) => {
 		if (self) {
 			console.log('Joined: ', channel);
+			channels.update((channels) => {
+				if (channels.includes(channel)) {
+					return channels;
+				} else {
+					channels.push(channel);
+					return channels;
+				}
+			});
 		}
 	});
 
@@ -38,4 +54,16 @@ export async function intialiseClient() {
 		console.log(err);
 	});
 	return client;
+}
+
+export async function joinChannel(client: tmi.Client, channel: string) {
+	await client.join(channel).catch((err) => {
+		console.log(err);
+	});
+}
+
+export async function leaveChannel(client: tmi.Client, channel: string) {
+	await client.part(channel).catch((err) => {
+		console.log(err);
+	});
 }
