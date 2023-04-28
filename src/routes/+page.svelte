@@ -25,10 +25,14 @@
 		class="h-3/4 w-full variant-filled-surface rounded-lg md:p-4 flex flex-col-reverse overflow-y-auto gap-2 p-2"
 	>
 		{#each $messages as chat}
-			<div>
-				{chat.channel}
-				<span style="color: {chat.userstate.color};">{chat.userstate.username}</span>
-				{chat.message}
+			<div class="rounded-md p-2 text-white">
+				<p>
+					<span class="badge variant-ringed-primary font-semibold">
+						{chat.channel}
+					</span>
+					<span style="color: {chat.userstate.color};">{chat.userstate.username}</span>
+					{chat.message}
+				</p>
 			</div>
 		{/each}
 	</div>
