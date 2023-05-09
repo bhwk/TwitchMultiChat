@@ -19,11 +19,9 @@
 	});
 </script>
 
-<div class="container h-full mx-auto flex flex-col gap-4 md:p-4 p-2">
-	<div
-		class="h-3/4 w-full variant-ghost-surface rounded-lg md:p-4 flex flex-col-reverse overflow-y-auto gap-2 p-2"
-	>
-		<Message />
-	</div>
-	<Channels {client} />
+<div
+	class="h-3/4 w-full variant-ghost-surface rounded-lg md:p-4 flex flex-col-reverse overflow-y-auto gap-2 p-2"
+>
+	<Message />
 </div>
+<Channels {client} />
