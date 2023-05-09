@@ -1,9 +1,10 @@
 import * as tmi from 'tmi.js';
 import type { ChatMessage } from './types';
 import { messages, channels } from '../store';
+import { get } from 'svelte/store';
 
 export async function intialiseClient() {
-	let client = new tmi.client({});
+	let client = new tmi.client({ channels: get(channels) });
 
 	client.on('disconnected', () => {
 		console.log('Disconnected from twitch servers');
