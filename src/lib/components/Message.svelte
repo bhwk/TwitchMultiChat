@@ -3,9 +3,9 @@
 </script>
 
 {#each $messages as chat}
-	<div class="rounded-md p-2 text-white">
+	<div class="p-2 leading-relaxed">
 		<p>
-			<span class="badge variant-ringed-primary font-semibold">
+			<span class="badge text-sm variant-filled-surface font-semibold">
 				{chat.channel}
 			</span>
 			<span class="font-bold" style="color: {chat.userstate.color};">{chat.userstate.username}</span
