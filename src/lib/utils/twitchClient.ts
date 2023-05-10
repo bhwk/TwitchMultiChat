@@ -1,6 +1,6 @@
 import * as tmi from 'tmi.js';
 import type { ChatMessage } from './types';
-import { messages, channels } from '../store';
+import { messages, channels, globalClient } from '../store';
 import { get } from 'svelte/store';
 
 export async function intialiseClient() {
@@ -8,11 +8,10 @@ export async function intialiseClient() {
 
 	client.on('disconnected', () => {
 		console.log('Disconnected from twitch servers');
-		channels.set([]);
 	});
 
 	client.on('connected', () => {
-		console.log('Connected to twtich servers');
+		console.log('Connected to twitch servers');
 	});
 
 	client.on('part', (channel, username, self) => {
@@ -57,7 +56,7 @@ export async function intialiseClient() {
 	await client.connect().catch((err) => {
 		console.log(err);
 	});
-	return client;
+	globalClient.set(client);
 }
 
 export async function joinChannel(client: tmi.Client, channel: string) {

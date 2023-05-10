@@ -1,22 +1,7 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { intialiseClient } from '$lib/utils/twitchClient';
-	import type { Client } from 'tmi.js';
+	import { globalClient } from '$lib/store';
 	import Message from '$lib/components/Message.svelte';
 	import Channels from '$lib/components/Channels.svelte';
-
-	let client: Client;
-
-	onMount(async () => {
-		client = await intialiseClient();
-	});
-
-	onDestroy(async () => {
-		if (client) {
-			client.disconnect();
-			console.log('Client destroyed!');
-		}
-	});
 </script>
 
 <div
@@ -24,4 +9,4 @@
 >
 	<Message />
 </div>
-<Channels {client} />
+<Channels client={$globalClient} />

@@ -7,13 +7,26 @@
 	import '../app.postcss';
 
 	import { AppBar } from '@skeletonlabs/skeleton';
+	import { onMount, onDestroy } from 'svelte';
+	import { intialiseClient } from '$lib/utils/twitchClient';
+	import { globalClient } from '$lib/store';
+
+	onMount(async () => {
+		await intialiseClient();
+	});
+	onDestroy(async () => {
+		if ($globalClient) {
+			await $globalClient.disconnect();
+			console.log('Client destroyed!');
+		}
+	});
 </script>
 
 <AppBar>
 	<svelte:fragment slot="lead">
 		<div class="flex gap-2 font-bold text-primary">
 			<a href="/">Home</a>
-			<a href="/video">Video</a>
+			<a href="/streams">Multi</a>
 		</div>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">(actions)</svelte:fragment>
