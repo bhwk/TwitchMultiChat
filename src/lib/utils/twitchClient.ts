@@ -45,7 +45,7 @@ export async function intialiseClient() {
 	client.on('chat', (channel, userstate, message) => {
 		let chatMessage: ChatMessage = { channel, userstate, message };
 		messages.update((messages) => {
-			if (messages.length >= 100) {
+			if (messages.length >= 300) {
 				messages.pop();
 			}
 			messages.unshift(chatMessage);
