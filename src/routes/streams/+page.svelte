@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { channels } from '$lib/store';
-	import SelectChip from '$lib/components/SelectChip.svelte';
 	import { get } from 'svelte/store';
 	import { onMount } from 'svelte';
+	import Player from '$lib/components/Player.svelte';
 	let data: object;
 
 	async function getStreams() {
@@ -15,4 +15,16 @@
 		});
 		data = JSON.parse(await response.json());
 	}
+
+	onMount(async () => {
+		await getStreams();
+	});
 </script>
+
+<div class="h-3/4 w-full variant-ghost-surface rounded-lg md:p-4 flex overflow-y-auto p-2 gap-1">
+	{#if data}
+		{#each Object.entries(data) as [channel, streams]}
+			<Player {channel} {streams} />
+		{/each}
+	{/if}
+</div>

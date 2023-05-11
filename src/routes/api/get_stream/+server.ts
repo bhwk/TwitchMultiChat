@@ -6,7 +6,10 @@ import path from 'path';
 
 export const POST = (async ({ request }) => {
 	const data = await request.json();
-	console.log(data);
+	data.forEach((channel: string, index: number) => {
+		data[index] = channel.slice(1);
+	});
+
 	let result = '';
 	const pythonProcess = spawn('python3', [
 		path.join(process.cwd(), 'src/scripts/getStreams.py'),
@@ -15,6 +18,7 @@ export const POST = (async ({ request }) => {
 
 	pythonProcess.stdout.on('data', (data) => {
 		result += data.toString();
+		console.log(result);
 	});
 
 	pythonProcess.stderr.on('error', (error) => {
