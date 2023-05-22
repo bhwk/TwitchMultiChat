@@ -5,7 +5,6 @@
 	export let streams: StreamData;
 
 	let video: HTMLMediaElement;
-	let videoSrc: string = '';
 
 	interface StreamData {
 		[key: string]: string;
@@ -13,13 +12,20 @@
 	async function setVideoSource(stream: string) {
 		if (video.canPlayType('application/vnd.apple.mpegurl')) {
 			video.src = stream;
-			video.play();
 		} else if (Hls.isSupported()) {
 			let hls = new Hls();
 			hls.loadSource(stream);
 			hls.attachMedia(video);
-			video.play();
 		}
+
+		video.onloadedmetadata = () => {
+			video.onplay = () => {
+				video.currentTime = video.duration - 8;
+			};
+			console.log(video.currentTime, video.duration);
+		};
+
+		video.play();
 	}
 
 	onMount(() => {
