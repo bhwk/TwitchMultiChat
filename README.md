@@ -3,5 +3,6 @@
 Second iteration of the multi-chat connector
 
 # To-do
-- [ ] Add video player
+
+- [x] Add video player
 - [ ] Differentiate streamer names
