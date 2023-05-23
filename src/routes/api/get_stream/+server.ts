@@ -18,7 +18,6 @@ export const POST = (async ({ request }) => {
 
 	pythonProcess.stdout.on('data', (data) => {
 		result += data.toString();
-		console.log(result);
 	});
 
 	pythonProcess.stderr.on('error', (error) => {
