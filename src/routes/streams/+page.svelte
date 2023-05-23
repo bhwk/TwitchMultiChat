@@ -21,7 +21,7 @@
 	});
 </script>
 
-<div class="w-full h-5/6 variant-ghost-surface rounded-lg md:p-4 flex overflow-y-auto p-2 gap-1">
+<div class="gap-1 flex flex-wrap items-center overflow-y-auto min-h-0 min-w-0">
 	{#if data}
 		{#each Object.entries(data) as [channel, streams]}
 			<Player {channel} {streams} />
