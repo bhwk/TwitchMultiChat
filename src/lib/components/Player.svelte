@@ -33,14 +33,21 @@
 	});
 </script>
 
-<div id={channel} class="w-full">
-	<!-- svelte-ignore a11y-media-has-caption -->
-	<video bind:this={video} class="w-1/2" />
-	{#each Object.entries(streams) as [quality, url]}
-		<button
-			on:click={() => {
-				setVideoSource(url);
-			}}>{quality}</button
-		>
-	{/each}
-</div>
+{#if streams}
+	<div
+		id={channel}
+		class="flex-grow basis-1/4 flex-shrink group relative border-surface-500 border-2 min-w-0 min-h-0"
+	>
+		<!-- svelte-ignore a11y-media-has-caption -->
+		<video bind:this={video} />
+		<div class="hidden group-hover:block absolute bottom-0 right-0">
+			{#each Object.entries(streams) as [quality, url]}
+				<button
+					on:click={() => {
+						setVideoSource(url);
+					}}>{quality}</button
+				>
+			{/each}
+		</div>
+	</div>
+{/if}
