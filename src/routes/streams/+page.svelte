@@ -21,10 +21,12 @@
 	});
 </script>
 
-<div class="gap-1 flex flex-wrap items-center overflow-y-auto min-h-0 min-w-0">
+<div class="gap-1 flex flex-wrap items-center overflow-y-scroll min-h-0 min-w-0">
 	{#if data}
 		{#each Object.entries(data) as [channel, streams]}
-			<Player {channel} {streams} />
+			{#if Object.keys(streams).length !== 0}
+				<Player {channel} {streams} />
+			{/if}
 		{/each}
 	{/if}
 </div>
