@@ -29,7 +29,6 @@
 			<a href="/streams">Multi</a>
 		</div>
 	</svelte:fragment>
-	<svelte:fragment slot="trail">(actions)</svelte:fragment>
 </AppBar>
 
 <div class="container mx-auto h-full flex flex-col gap-4 md:p-4 p-2">
